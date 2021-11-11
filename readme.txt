@@ -1,2 +1,2 @@
 Git is a distributed version control system.
-Git is fre software
+Git is free software distributed under the GOL.
