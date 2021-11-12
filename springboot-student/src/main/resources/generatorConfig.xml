@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--    导入数据库连接配置-->
+    <!--    <properties resource="application.yml"/>-->
+    <!--    引入本地Mysql连接 ,指定当前JDBC的驱动-->
+    <classPathEntry location="/Users/xuxing/.m2/repository/mysql/mysql-connector-java/8.0.27/mysql-connector-java-8.0.27.jar" />
+    <context id="test"  targetRuntime="MyBatis3">
+        <!-- 实体类生成toString 方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- Mysql数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/demo?serverTimezone=UTC"
+                        userId="root"
+                        password="111">
+        </jdbcConnection>
+
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制
+         默认false，把jdbc decimal 和 numeric 类型解析为integer
+         true，把jdbc decimal 和 numeric 类型解析为java.math.bigdecimal-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+        targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
+        targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
+    -->
+        <!-- targetProject：生成POJO类的位置 -->
+        <javaModelGenerator targetPackage="com.example.mybatisdemo.entity" targetProject="src">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+            <!--            <property name="mergeable" value="true"/>-->
+        </javaModelGenerator>
+
+        <!-- targetProject：mapper映射文件生成的位置,为每一个数据库的表生成对应的mapper.xml文件-->
+        <sqlMapGenerator targetPackage="com.example.mybatisdemo.mapper" targetProject="src">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的映射文件
+        type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+        type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+        type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <!-- targetProject：mapper(DAO)接口生成的的位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.mybatisdemo.mapper"  targetProject="src">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- 指定数据表 你想要生成那些表就添加几个 tableName:表名; domainObjectName:对应的DO,是实体类名 -->
+        <table schema="" tableName="student" domainObjectName="Student" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false"
+               enableSelectByExample="true" selectByExampleQueryId="true" selectByPrimaryKeyQueryId="true" enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"/>
+          </context>
+</generatorConfiguration>
