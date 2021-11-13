@@ -7,11 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.websocket.server.PathParam;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -60,7 +57,13 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.queryByDate(date1,date2);
     }
 
+    @Override
+    public List<Student> queryByND(String name, String date1, String date2) {
+        return studentMapper.queryByND(name,date1,date2);
+    }
 
-
-
+    @Override
+    public List<Student> queryByND2(String name, String date1, String date2) {
+        return studentMapper.queryByND2(name,date1,date2);
+    }
 }

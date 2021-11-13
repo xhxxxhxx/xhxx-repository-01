@@ -30,4 +30,9 @@ public interface StudentMapper {
 
     //根据时间范围查询
     List<Student> queryByDate(String date1, String date2);
+
+    //根据名字和时间范围查询
+    List<Student> queryByND(String name,String date1, String date2);
+
+    List<Student> queryByND2(String name,String date1, String date2);
 }

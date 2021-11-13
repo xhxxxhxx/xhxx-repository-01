@@ -1,13 +1,12 @@
 package com.example.controller;
 
+import com.example.ddd.DemoStudent;
 import com.example.pojo.Student;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -58,5 +57,16 @@ public class StudentController {
         return studentService.queryByDate(date1,date2);
     }
 
+    @RequestMapping("/queryByND/{name},{date1},{date2}")
+    public List<Student> queryByND(@PathVariable String name,@PathVariable String date1,@PathVariable String date2){
+        return studentService.queryByND(name, date1, date2);
+    }
 
+    @RequestMapping("/queryByND2")
+    public List<Student> queryByND2(@RequestBody DemoStudent demoStudent){
+        String name = demoStudent.getName();
+        String date1 = demoStudent.getDate1();
+        String date2 = demoStudent.getDate2();
+        return studentService.queryByND2(name,date1,date2);
+    }
 }

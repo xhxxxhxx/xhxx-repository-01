@@ -29,5 +29,7 @@ public interface StudentService {
     //根据时间查询
     List<Student> queryByDate(String date1, String date2);
 
-    /*List<Student> queryy(Integer age1, Integer age2);*/
+    List<Student> queryByND(String name,String date1, String date2);
+
+    List<Student> queryByND2(String name,String date1, String date2);
 }

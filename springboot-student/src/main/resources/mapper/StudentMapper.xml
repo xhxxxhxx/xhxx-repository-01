@@ -31,4 +31,12 @@
         select * from student where date_format(#{date1},'%Y-%c-%d %H:%i:%s') &lt;= `date` and date_format(#{date2},'%Y-%c-%d %H:%i:%s') &gt;= `date`
     </select>
 
+    <select id="queryByND" resultType="Student">
+        select * from student where name like '%${name}%' and date_format(#{date1},'%Y-%c-%d %H:%i:%s') &lt;= `date` and date_format(#{date2},'%Y-%c-%d %H:%i:%s') &gt;= `date`
+    </select>
+
+    <select id="queryByND2" resultType="Student">
+        select * from student where name like '%${name}%' and date_format(#{date1},'%Y-%c-%d %H:%i:%s') &lt;= `date` and date_format(#{date2},'%Y-%c-%d %H:%i:%s') &gt;= `date`
+    </select>
+
 </mapper>
