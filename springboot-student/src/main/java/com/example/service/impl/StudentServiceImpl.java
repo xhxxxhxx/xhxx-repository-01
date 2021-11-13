@@ -3,11 +3,15 @@ package com.example.service.impl;
 import com.example.mapper.StudentMapper;
 import com.example.pojo.Student;
 import com.example.service.StudentService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.websocket.server.PathParam;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -20,28 +24,43 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(Student student) {
+    public Boolean save(Student student) {
+        //判断手机号位数
         if (student.getPhone().length() != 11){
-            System.out.println("请输入正确的手机号");
+            return false;
         }else {
+            //添加的时间
             student.setDate(new Date());
-            studentMapper.addStudent(student);
+            return studentMapper.save(student);
         }
     }
 
     @Override
-    public Student queryById(Integer id) {
+    public Boolean update(Student student) {
+        return studentMapper.update(student);
+    }
+
+    @Override
+    public Student queryById(int id) {
         return studentMapper.queryById(id);
     }
 
     @Override
-    public Integer updateStudent(Student student) {
-        return studentMapper.updateStudent(student);
+    public Boolean delete(int id) {
+        return studentMapper.delete(id);
     }
 
     @Override
-    public void deleteStudent(Integer id) {
-        studentMapper.deleteStudent(id);
+    public List<Student> queryByName(@Param("name") String name) {
+        return studentMapper.queryByName(name);
     }
+
+    @Override
+    public List<Student> queryByDate(String date1,String date2) {
+        return studentMapper.queryByDate(date1,date2);
+    }
+
+
+
 
 }

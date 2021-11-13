@@ -1,27 +1,33 @@
 package com.example.mapper;
 
 import com.example.pojo.Student;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-
+@Repository
 public interface StudentMapper {
 
     //查询全部
     public List<Student> query(Student student);
 
     //增加
-    public void addStudent(Student student);
-
-    //根据id查询学生
-    public Student queryById(Integer id);
+    Boolean save(Student student);
 
     //修改
-    public Integer updateStudent(Student student);
+    Boolean update(Student student);
 
-    //删除
-    public void deleteStudent(Integer id);
+    //通过id查询
+    Student queryById(int id);
 
+    //通过id删除
+    Boolean delete(int id);
 
+    //通过名字模糊查询
+    List<Student> queryByName(String name);
+
+    //根据时间范围查询
+    List<Student> queryByDate(String date1, String date2);
 }

@@ -3,52 +3,60 @@ package com.example.controller;
 import com.example.pojo.Student;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-@Controller
+@RestController
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
 
-    //基础页面的请求
-    @RequestMapping("/add")
-    public String add(){
-        return "addStudent";
+
+    @RequestMapping("/query")
+    public List<Student> query(){
+        return studentService.query(null);
     }
 
-    @RequestMapping("/student/query")
-    public String query(Model model){
-        model.addAttribute("list",studentService.query(null));
-        return "student";
+    //插入用户信息
+    @RequestMapping(value = "/insert", method = RequestMethod.GET)
+    public Boolean insert(Student student){
+        return studentService.save(student);
     }
 
-    @RequestMapping("/addStudent")
-    public String addStudent(Student student){
-        studentService.addStudent(student);
-        return "redirect:/student/query";
+    //更改
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public Boolean update(Student student){
+        return studentService.update(student);
     }
 
-    @RequestMapping("/student/updateInfo")
-    public String updateInfo(Integer id,Model model){
-        Student student = studentService.queryById(id);
-        model.addAttribute("student",student);
-        return "updateStudent";
+    //通过id查询
+    @RequestMapping(value = "/queryById/{id}", method = RequestMethod.GET)
+    public String queryById(@PathVariable int id){
+        return studentService.queryById(id).toString();
     }
 
-    @RequestMapping("/student/update")
-    public String updateStudent(Student student){
-        studentService.updateStudent(student);
-        return "redirect:/student/query";
+    //通过id删除
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public Boolean delete(int id){
+        return studentService.delete(id);
     }
 
-    @RequestMapping("/student/deleteStudent")
-    public String deleteStudent(Integer id){
-        studentService.deleteStudent(id);
-        return "redirect:/student/query";
+    //根据名字模糊查询
+    @RequestMapping(value = "/queryByName/{name}", method = RequestMethod.GET)
+    public List<Student> queryByName(@PathVariable String name){
+        return studentService.queryByName(name);
     }
+
+    //根据时间查询
+    @RequestMapping(value = "/queryByDate/{date1},{date2}", method = RequestMethod.GET)
+    public List<Student> queryByDate(@PathVariable String date1,@PathVariable String date2){
+        return studentService.queryByDate(date1,date2);
+    }
+
 
 }

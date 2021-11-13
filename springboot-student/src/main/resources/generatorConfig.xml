@@ -63,5 +63,6 @@
         <!-- 指定数据表 你想要生成那些表就添加几个 tableName:表名; domainObjectName:对应的DO,是实体类名 -->
         <table schema="" tableName="student" domainObjectName="Student" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false"
                enableSelectByExample="true" selectByExampleQueryId="true" selectByPrimaryKeyQueryId="true" enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"/>
-          </context>
+        </context>
 </generatorConfiguration>
+

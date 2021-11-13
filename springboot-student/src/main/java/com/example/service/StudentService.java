@@ -1,20 +1,33 @@
 package com.example.service;
 
 import com.example.pojo.Student;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface StudentService {
 
     public List<Student> query(Student student);
 
-    public void addStudent(Student student);
-
-    //根据id查询学生
-    public Student queryById(Integer id);
+    //增加
+    Boolean save(Student student);
 
     //修改
-    public Integer updateStudent(Student student);
+    Boolean update(Student student);
 
-    public void deleteStudent(Integer id);
+    //根据ID查询
+    public Student queryById(int id);
+
+    //删除
+    Boolean delete(int id);
+
+    //根据名字模糊查询
+    List<Student> queryByName(@Param("name") String name);
+
+    //根据时间查询
+    List<Student> queryByDate(String date1, String date2);
+
+    /*List<Student> queryy(Integer age1, Integer age2);*/
 }

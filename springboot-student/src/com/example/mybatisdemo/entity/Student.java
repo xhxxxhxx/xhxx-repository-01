@@ -1,16 +1,22 @@
-package com.example.pojo;
+package com.example.mybatisdemo.entity;
 
 import java.util.Date;
 
 public class Student {
-
     private Integer id;
+
     private String name;
+
     private Integer age;
+
     private Integer sex;
+
     private String number;
+
     private String phone;
+
     private Date date;
+
     private String introduce;
 
     public Integer getId() {
@@ -26,7 +32,7 @@ public class Student {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getAge() {
@@ -50,7 +56,7 @@ public class Student {
     }
 
     public void setNumber(String number) {
-        this.number = number;
+        this.number = number == null ? null : number.trim();
     }
 
     public String getPhone() {
@@ -58,7 +64,7 @@ public class Student {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public Date getDate() {
@@ -74,21 +80,24 @@ public class Student {
     }
 
     public void setIntroduce(String introduce) {
-        this.introduce = introduce;
+        this.introduce = introduce == null ? null : introduce.trim();
     }
-
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", sex=" + sex +
-                ", number='" + number + '\'' +
-                ", phone='" + phone + '\'' +
-                ", date=" + date +
-                ", introduce='" + introduce + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", age=").append(age);
+        sb.append(", sex=").append(sex);
+        sb.append(", number=").append(number);
+        sb.append(", phone=").append(phone);
+        sb.append(", date=").append(date);
+        sb.append(", introduce=").append(introduce);
+        sb.append("]");
+        return sb.toString();
     }
 }
